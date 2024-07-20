@@ -1,4 +1,4 @@
-const { getCart, addToCart } = require("../services/cartService");
+const { getCart, modifyCart } = require("../services/cartService");
 const AppError = require("../utils/appError");
 
 async function getCartByUser(req, res) {
@@ -30,9 +30,9 @@ async function getCartByUser(req, res) {
     }
 }
 
-async function addProductToCart(req, res) {
+async function modifyProductToCart(req, res) {
     try {
-        const cart = await addToCart(req.user.id, req.params.productId);
+        const cart = await modifyCart(req.user.id, req.params.productId, req.params.operation == "add");
         return res.status(200).json({
             success: true,
             message: "Successfully added to the card",
@@ -61,5 +61,5 @@ async function addProductToCart(req, res) {
 
 module.exports = {
     getCartByUser,
-    addProductToCart
+    modifyProductToCart
 }
