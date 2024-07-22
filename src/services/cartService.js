@@ -64,9 +64,18 @@ async function modifyCart(userId, productId, shouldAdd = true) {
     return cart;
 }
 
-async function clearProductFromCart(userId){
-    const response = await clearCart(userId);
-    return response;
+async function clearProductFromCart(userId) {
+    const cart = await clearCart(userId);
+    if (!cart) {
+        throw new NotFoundError("Cart");
+    }
+
+
+    cart.items = [];
+
+    await cart.save();
+
+    return cart;
 }
 
 module.exports = {

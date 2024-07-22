@@ -10,6 +10,7 @@ const uploader = require('./middlewares/multerMiddleware');
 const cloudinary = require('./config/cloudinaryConfig');
 const fs = require('fs/promises');
 const productRouter = require('./routes/productRoute');
+const { orderRouter } = require('./routes/orderRoute');
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use('/users', userRouter);
 app.use('/carts', cartRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
+app.use('/orders', orderRouter);
 
 app.get('/ping', isLoggedIn, (req, res) => {
     console.log(req.body);

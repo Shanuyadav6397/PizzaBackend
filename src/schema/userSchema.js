@@ -47,16 +47,14 @@ const userSchema = new mongoose.Schema({
         minlength: [6, 'password atleast 6 characters long'],
         maxlength: [20, 'password atleast 20 characters length']
     },
-    role:{
-        type:String,
-        enum:["USER", "ADMIN"],
-        default:"USER"
+    address: {
+        type: String
     }
 }, {
     timestamp: true
 });
 
-userSchema.pre('save', async function(){
+userSchema.pre('save', async function () {
     // here we can bcrypt (Hashed) the user password before save in mongoDB
     const hashedPassword = await bcrypt.hash(this.password, 10);
     this.password = hashedPassword;
