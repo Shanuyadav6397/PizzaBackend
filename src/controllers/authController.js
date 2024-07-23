@@ -28,6 +28,17 @@ async function login(req, res) {
     }
 }
 
+async function logout(req,res){
+    res.cookie("authToken", '');
+    return  res.status(200).json({
+        success:true,
+        message:"Log out success",
+        data:{},
+        error:{}
+    })
+}
+
 module.exports = {
-    login
+    login,
+    logout
 }

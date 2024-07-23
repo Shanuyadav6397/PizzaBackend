@@ -3,6 +3,7 @@ const registerUser = require("../services/userService");
 async function createUser(req, res) {
     try {
         const response = await registerUser(req.body);
+        console.log(response);
         return res.status(201).json({
             success: true,
             message: 'Successfully created',
